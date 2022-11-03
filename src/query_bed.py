@@ -11,7 +11,28 @@ from bed import (
 def extract_region(features: list[BedLine],
                    start: int, end: int) -> list[BedLine]:
     """Extract region chrom[start:end] and write it to outfile."""
-    return []  # FIXME: We want the actual region, not an empty list!
+
+    low, high = 0, len(features)
+    while low < high:
+        mid = (low+high)//2
+        if features[mid].chrom_start < start:
+            low = mid+1
+        else:
+            high = mid
+
+    lowerbound = low
+
+    low, high = 0, len(features)
+    while low < high:
+        mid = (low+high)//2
+        if features[mid].chrom_start < end:
+            low = mid+1
+        else:
+            high = mid
+    upperbound = low  # makes sense right?
+
+    # FIXME: We want the actual region, not an empty list!
+    return features[lowerbound:upperbound]
 
 
 def main() -> None:
@@ -24,9 +45,10 @@ def main() -> None:
 
     # 'outfile' is either provided as a file name or we use stdout
     argparser.add_argument('-o', '--outfile',  # use an option to specify this
-                           metavar='output',  # name used in help text
-                           type=argparse.FileType('w'),  # file for writing
-                           default=sys.stdout)
+                                               metavar='output',  # name used in help text
+                                               type=argparse.FileType(
+                                                   'w'),  # file for writing
+                                               default=sys.stdout)
 
     # Parse options and put them in the table args
     args = argparser.parse_args()

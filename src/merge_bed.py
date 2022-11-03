@@ -36,12 +36,20 @@ def merge(f1: list[BedLine], f2: list[BedLine], outfile: TextIO) -> None:
     i, j = 0, 0
 
     while i < len(f1) and j < len(f2):
-        if f1.chrom[i] < f2.chrom[j] or (f1.chrom[i] == f2.chrom[j] and f1[i].chrom_start <= f2[j].chrom_start):
+
+        if f1[i].chrom < f2[j].chrom:
+            print_line(f1[i], outfile)
+            i += 1
+        elif f2[j].chrom < f1[i].chrom:
+            print_line(f2[j], outfile)
+            j += 1
+        elif f1[i].chrom == f2[j].chrom and f1[i].chrom_start <= f2[j].chrom_start:
             print_line(f1[i], outfile)
             i += 1
         else:
             print(f2[j], outfile)
             j += 1
+
     while i < len(f1):
         print_line(f1[i], outfile)
         i += 1
@@ -57,10 +65,10 @@ def main() -> None:
     argparser.add_argument('f1', type=argparse.FileType('r'))
     argparser.add_argument('f2', type=argparse.FileType('r'))
     argparser.add_argument('-o', '--outfile',  # use an option to specify this
-                           metavar='output',   # name used in help text
-                           type=argparse.FileType(
-                               'w'),  # file for writing
-                           default=sys.stdout)
+                                               metavar='output',   # name used in help text
+                                               type=argparse.FileType(
+                                                       'w'),  # file for writing
+                                               default=sys.stdout)
 
     # Parse options and put them in the table args
     args = argparser.parse_args()

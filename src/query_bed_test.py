@@ -6,7 +6,7 @@ import os
 import filecmp
 from query_bed import main
 
-input_bed 	= "data/large.bed"
+input_bed 	= "data/large-sorted.bed"
 input_query1 = "data/query-1.txt"
 output_bed1	= "data/testoutput1.bed"
 expected1= "data/expected-1.txt"

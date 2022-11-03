@@ -15,7 +15,7 @@ def sort_file(table: Table) -> None:
         # Here we iterate through all the chromosomes in the file.
         # You need to sort `features` with respect to chrom_start
         # and then updatte the table
-        features.sort()
+        features.sort() #sorted
         table[chrom] = features  # features should be sorted here
 
 

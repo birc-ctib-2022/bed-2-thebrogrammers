@@ -71,7 +71,7 @@ If a feature were multiple nucleotides we risk having overhangs, and would need 
 
 If we merge two files the complexity would be O(m+n), adding another files we would reach O((m+n)+(m+n+l)) so we would end up with something like O(m*i + n*(i-1) + l*(i-2)...), where i is the total number of files.
 
-If we merge all files at once, it would be the sum of the length of all files.
+If we merge all files at once, the complexity would be O(the sum of the length of all files).
 
 
 

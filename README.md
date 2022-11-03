@@ -60,7 +60,17 @@ Once you have implemented a lower bound search for the start of the range, imple
 
 *How do you use binary search to find the lower bound of a number? How did you have to modify the binary search algorithm?*
 
+When looking for a specific value in a binary search the algorithm includes a break, for when that value is found. We are not sure to have the actual value, and as such the break condition is removed to make the algorithm run until we get as close to the value as possible where low=high
+
 *Would anything be more difficult if the features covered ranges instead of single nucleotides (like real BED files)? What could go wrong, if anything?*
 
+In a single nucleotide bedfile all features are sure to be entirely included in a query region [query_start:feature:query_end].
+If a feature were multiple nucleotides we risk having overhangs, and would need to handle these cases. This handling would depends on assignment specifications, weather to include or exclude overlaps and how to do that. this would affect pretty much all parts of the program, sorting, merging and query.
+
 *We wrote a tool for merging two BED files, but what if we had a bunch of them? What would the complexity be if we merged them in, one at a time? What would the complexity be if we merged all of the files at the same time?*
+
+if we merge two files the complexity would be O(m+n), adding another files we would reach O((m+n)+(m+n+l))
+
+
+
 

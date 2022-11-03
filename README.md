@@ -69,7 +69,9 @@ If a feature were multiple nucleotides we risk having overhangs, and would need 
 
 *We wrote a tool for merging two BED files, but what if we had a bunch of them? What would the complexity be if we merged them in, one at a time? What would the complexity be if we merged all of the files at the same time?*
 
-if we merge two files the complexity would be O(m+n), adding another files we would reach O((m+n)+(m+n+l))
+If we merge two files the complexity would be O(m+n), adding another files we would reach O((m+n)+(m+n+l)) so we would end up with something like O(m*i + n*(i-1) + l*(i-2)...), where i is the total number of files.
+
+If we merge all files at once, it would be the sum of the length of all files.
 
 
 

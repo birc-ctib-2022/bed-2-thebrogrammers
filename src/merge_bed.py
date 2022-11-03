@@ -47,7 +47,7 @@ def merge(f1: list[BedLine], f2: list[BedLine], outfile: TextIO) -> None:
             print_line(f1[i], outfile)
             i += 1
         else:
-            print(f2[j], outfile)
+            print_line(f2[j], outfile)
             j += 1
 
     while i < len(f1):
